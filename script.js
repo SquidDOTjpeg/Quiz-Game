@@ -1,4 +1,3 @@
-var time 
 var score
 var startBtn = document.getElementById("start-btn")
 var answerBtn = document.getElementById("answer-btn")
@@ -40,4 +39,28 @@ function start(){
     vhsBtn.classList.add("hide")
     answerBtn.classList.remove("hide")
     questionText.classList.remove("hide")
+
+    timerCountDown(10, 'timer')
+}
+
+function timerCountDown(time, elem){
+    var element = document.getElementById(elem)
+    element.innerHTML = time + " seconds remaining."
+    element.classList.remove('hide')
+    if(time < 1){
+        clearTimeout(timer)
+        element.classList.add('hide')
+        finish()
+        return
+    }
+    time--
+    var timer = setTimeout('timerCountDown('+time+',"'+elem+'")',1000)
+}
+
+
+function finish(){
+    startBtn.classList.remove("hide")
+    vhsBtn.classList.remove("hide")
+    answerBtn.classList.add("hide")
+    questionText.classList.add("hide")
 }
