@@ -2,7 +2,12 @@ var score
 var startBtn = document.getElementById("start-btn")
 var answerBtn = document.getElementById("answer-btn")
 var vhsBtn = document.getElementById("high-score-btn")
+var question = document.getElementById("question")
 var questionText = document.getElementById("question-text")
+
+let shuffledQuestions, currentQuestionIndex
+
+startBtn.addEventListener('click', start)
 
 var questions = [
     {
@@ -38,9 +43,13 @@ function start(){
     startBtn.classList.add("hide")
     vhsBtn.classList.add("hide")
     answerBtn.classList.remove("hide")
-    questionText.classList.remove("hide")
+    question.classList.remove("hide")
+    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    currentQuestionIndex = 0
 
-    timerCountDown(10, 'timer')
+    setNextQuestion()
+
+    timerCountDown(75, 'timer')
 }
 
 function timerCountDown(time, elem){
@@ -57,10 +66,17 @@ function timerCountDown(time, elem){
     var timer = setTimeout('timerCountDown('+time+',"'+elem+'")',1000)
 }
 
+function setNextQuestion(){
+    showQuestion(shuffledQuestions[currentQuestionIndex])
+}
+
+function showQuestion(question){
+    questionText.innerText = question.title
+}
 
 function finish(){
     startBtn.classList.remove("hide")
     vhsBtn.classList.remove("hide")
     answerBtn.classList.add("hide")
-    questionText.classList.add("hide")
+    question.classList.add("hide")
 }
