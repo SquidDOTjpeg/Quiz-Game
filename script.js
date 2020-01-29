@@ -49,7 +49,7 @@ function start() {
     answerBtnContainer.classList.remove("hide")
     question.classList.remove("hide")
     shuffledQuestions = questions.sort(() => Math.random() - .5)
-    currentQuestionIndex = 0
+    currentQuestionIndex = -1
 
     setNextQuestion()
 
@@ -91,11 +91,16 @@ function selectAnswer(event){
     var userAnswer = event.target.textContent
     if(userAnswer === questions[currentQuestionIndex].correct){
         score++
+        nextBtn.classList.remove('hide')
+    }
+    else{
+        nextBtn.classList.remove('hide')
     }
 
 }
 // Reseting the form between questions
 function resetState(){
+    currentQuestionIndex++ 
     nextBtn.classList.add('hide')
     while(answerBtnContainer.firstChild) {
         answerBtnContainer.removeChild(answerBtnContainer.firstChild)
@@ -110,7 +115,7 @@ function finish() {
     startBtn.innerText = "Restart"
 }
 
-console.log(questions.length)
+
 
 
 
