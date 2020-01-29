@@ -5,6 +5,7 @@ var vhsBtn = document.getElementById("high-score-btn")
 var question = document.getElementById("question")
 var questionText = document.getElementById("question-text")
 var nextBtn = document.getElementById("next-btn")
+var scoreDisplayContainer = document.getElementById('score-display')
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -49,6 +50,10 @@ function start() {
     question.classList.remove("hide")
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = -1
+    while(scoreDisplayContainer.firstChild){
+        scoreDisplayContainer.removeChild(scoreDisplayContainer.firstChild)
+    }
+    score = 0
 
     setNextQuestion()
 
@@ -109,7 +114,7 @@ function selectAnswer(event){
     }
 
 }
-// Reseting the form between questions...
+// Reseting the form between questions
 function resetState(){
     currentQuestionIndex++ 
     nextBtn.classList.add('hide')
@@ -117,24 +122,17 @@ function resetState(){
     while(answerBtnContainer.firstChild) {
         answerBtnContainer.removeChild(answerBtnContainer.firstChild)
     }
-    //and running finish function if the quiz runs out of questions to ask
-    if(currentQuestionIndex > questions.length - 1){
-        finish()
-    }
 }
-
-function truncateCountDown(){
-
-}
-
 // Runs when you run out of time to reset the game
 function finish() {
+    var scoreDisplay = document.createElement('h2')
+    scoreDisplay.innerText = "Your final score is " + score + " out of " + questions.length + "!"
+    scoreDisplayContainer.appendChild(scoreDisplay)
     startBtn.classList.remove("hide")
     vhsBtn.classList.remove("hide")
     answerBtnContainer.classList.add("hide")
     question.classList.add("hide")
     startBtn.innerText = "Restart"
+
     
 }
-
-
