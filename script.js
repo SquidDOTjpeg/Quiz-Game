@@ -73,6 +73,7 @@ function timerCountDown(time, elem) {
 }
 
 function setNextQuestion() {
+    resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
@@ -81,9 +82,23 @@ function showQuestion(question) {
     for (i = 0; i < questions[currentQuestionIndex].choices.length; i++) {
         var buttons = document.createElement('button')
         buttons.innerText = questions[currentQuestionIndex].choices[i]
+        buttons.addEventListener('click', selectAnswer)
         answerBtnContainer.appendChild(buttons)
     }
+    
+}
 
+function selectAnswer(e){
+    var 
+
+    
+}
+
+function resetState(){
+    nextBtn.classList.add('hide')
+    while(answerBtnContainer.firstChild) {
+        answerBtnContainer.removeChild(answerBtnContainer.firstChild)
+    }
 }
 
 function finish() {
