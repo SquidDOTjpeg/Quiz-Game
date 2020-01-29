@@ -6,7 +6,6 @@ var question = document.getElementById("question")
 var questionText = document.getElementById("question-text")
 var nextBtn = document.getElementById("next-btn")
 
-
 let shuffledQuestions, currentQuestionIndex
 
 startBtn.addEventListener('click', start)
@@ -20,7 +19,7 @@ var questions = [
         correct: "Hyper Text Markup Language"
     },
     {
-        title: "What 2 + 2?",
+        title: "What is 2 + 2?",
         choices: ["4", "22", "8", "I eat crayons"],
         correct: "4"
     },
@@ -60,11 +59,20 @@ function timerCountDown(time, elem) {
     var element = document.getElementById(elem)
     element.innerHTML = time + " seconds remaining."
     element.classList.remove('hide')
+    //Clears timer if countdown reaches 0...
     if (time < 1) {
         clearTimeout(timer)
         element.classList.add('hide')
         finish()
         return
+    }
+    //Or if theres no more questions
+    if(currentQuestionIndex > questions.length - 1){
+        clearTimeout(timer)
+        element.classList.add('hide')
+        finish()
+        return
+
     }
     time--
     var timer = setTimeout('timerCountDown(' + time + ',"' + elem + '")', 1000)
@@ -86,26 +94,39 @@ function showQuestion(question) {
     
 }
 
-//User selecting answer
+//User selecting answer...
 function selectAnswer(event){
     var userAnswer = event.target.textContent
+    //and checking if that answer is correct
     if(userAnswer === questions[currentQuestionIndex].correct){
         score++
         nextBtn.classList.remove('hide')
+        answerBtnContainer.classList.add('hide')
     }
     else{
         nextBtn.classList.remove('hide')
+        answerBtnContainer.classList.add('hide')
     }
 
 }
-// Reseting the form between questions
+// Reseting the form between questions...
 function resetState(){
     currentQuestionIndex++ 
     nextBtn.classList.add('hide')
+    answerBtnContainer.classList.remove('hide')
     while(answerBtnContainer.firstChild) {
         answerBtnContainer.removeChild(answerBtnContainer.firstChild)
     }
+    //and running finish function if the quiz runs out of questions to ask
+    if(currentQuestionIndex > questions.length - 1){
+        finish()
+    }
 }
+
+function truncateCountDown(){
+
+}
+
 // Runs when you run out of time to reset the game
 function finish() {
     startBtn.classList.remove("hide")
@@ -113,14 +134,7 @@ function finish() {
     answerBtnContainer.classList.add("hide")
     question.classList.add("hide")
     startBtn.innerText = "Restart"
+    
 }
-
-
-
-
-
-
-
-
 
 
