@@ -1,4 +1,4 @@
-var score
+var score = 0
 var startBtn = document.getElementById("start-btn")
 var answerBtnContainer = document.getElementById("answer-btn-container")
 var vhsBtn = document.getElementById("high-score-btn")
@@ -16,14 +16,12 @@ nextBtn.addEventListener('click', setNextQuestion)
 var questions = [
     {
         title: "What language do you use to code the basic frame work of a website?",
-        choices: [
-            "Mandarin", "English", "Hyper Text Markup Language", "I eat crayons"],
+        choices: ["Mandarin", "English", "Hyper Text Markup Language", "I eat crayons"],
         correct: "Hyper Text Markup Language"
     },
     {
         title: "What 2 + 2?",
-        choices: [
-            "4", "22", "8", "I eat crayons"],
+        choices: ["4", "22", "8", "I eat crayons"],
         correct: "4"
     },
     {
@@ -44,7 +42,7 @@ var questions = [
 
 ]
 
-
+// Runs on clicking start btn
 function start() {
     startBtn.classList.add("hide")
     vhsBtn.classList.add("hide")
@@ -57,7 +55,7 @@ function start() {
 
     timerCountDown(75, 'timer')
 }
-
+// Timer
 function timerCountDown(time, elem) {
     var element = document.getElementById(elem)
     element.innerHTML = time + " seconds remaining."
@@ -71,12 +69,12 @@ function timerCountDown(time, elem) {
     time--
     var timer = setTimeout('timerCountDown(' + time + ',"' + elem + '")', 1000)
 }
-
+// Calling the next question
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
-
+// Finding the next questions information and button information
 function showQuestion(question) {
     questionText.innerText = question.title
     for (i = 0; i < questions[currentQuestionIndex].choices.length; i++) {
@@ -88,19 +86,22 @@ function showQuestion(question) {
     
 }
 
-function selectAnswer(e){
-    var 
+//User selecting answer
+function selectAnswer(event){
+    var userAnswer = event.target.textContent
+    if(userAnswer === questions[currentQuestionIndex].correct){
+        score++
+    }
 
-    
 }
-
+// Reseting the form between questions
 function resetState(){
     nextBtn.classList.add('hide')
     while(answerBtnContainer.firstChild) {
         answerBtnContainer.removeChild(answerBtnContainer.firstChild)
     }
 }
-
+// Runs when you run out of time to reset the game
 function finish() {
     startBtn.classList.remove("hide")
     vhsBtn.classList.remove("hide")
