@@ -7,7 +7,7 @@ It's a game in which you are quizzed. You have 75 seconds to answer 5 of the har
 SquidDOTjpeg
 
 # Acknowledgement
-Gus helped me with the checking if an answer was correct
+Gus @ https://github.com/gusvalenzuela helped me with the checking if an answer was correct
 
 # Lisence
 SquidDOTjpeg
