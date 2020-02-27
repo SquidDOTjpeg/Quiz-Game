@@ -12,3 +12,6 @@ Gus helped me with the checking if an answer was correct
 # Lisence
 SquidDOTjpeg
 
+# Link
+
+https://squiddotjpeg.github.io/Quiz-Game/
