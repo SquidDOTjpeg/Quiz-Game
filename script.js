@@ -25,7 +25,7 @@ var questions = [
         correct: "4"
     },
     {
-        title: "How many questions is the minimum for this assignment?",
+        title: "What is 2 * 2?",
         choices: ["4", "22", "5", "I eat crayons"],
         correct: "5"
     },
@@ -92,6 +92,7 @@ function showQuestion(question) {
     questionText.innerText = question.title
     for (i = 0; i < questions[currentQuestionIndex].choices.length; i++) {
         var buttons = document.createElement('button')
+        buttons.classList.add("answer-buttons")
         buttons.innerText = questions[currentQuestionIndex].choices[i]
         buttons.addEventListener('click', selectAnswer)
         answerBtnContainer.appendChild(buttons)
